@@ -14,5 +14,4 @@
 
 locals {
   service = "cert-manager"
-  # service_name = format("%s-cert-manager", var.project)
 }

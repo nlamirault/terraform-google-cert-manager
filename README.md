@@ -37,26 +37,22 @@ service_account = "cert-manager"
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.14.0 |
-| google | >= 3.54.0 |
+| terraform | >= 1.0.0 |
 
 ## Providers
 
-| Name | Version |
-|------|---------|
-| google | >= 3.54.0 |
+No provider.
 
 ## Modules
 
-No Modules.
+| Name | Source | Version |
+|------|--------|---------|
+| iam | terraform-google-modules/iam/google//modules/service_accounts_iam | v7.3.0 |
+| service_account | terraform-google-modules/service-accounts/google | 4.0.3 |
 
 ## Resources
 
-| Name |
-|------|
-| [google_project_iam_member](https://registry.terraform.io/providers/hashicorp/google/3.54.0/docs/resources/project_iam_member) |
-| [google_service_account](https://registry.terraform.io/providers/hashicorp/google/3.54.0/docs/resources/service_account) |
-| [google_service_account_iam_member](https://registry.terraform.io/providers/hashicorp/google/3.54.0/docs/resources/service_account_iam_member) |
+No resources.
 
 ## Inputs
 

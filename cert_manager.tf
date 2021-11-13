@@ -23,7 +23,7 @@ module "service_account" {
   ]
 
   project_roles = [
-    format("%s=>roles/dnsAdmin", var.project)
+    format("%s=>roles/dns.admin", var.project)
   ]
 }
 
@@ -31,7 +31,7 @@ module "iam" {
   source  = "terraform-google-modules/iam/google//modules/service_accounts_iam"
   version = "7.3.0"
 
-  project_id = var.project
+  project = var.project
 
   service_accounts = [
     module.service_account.email

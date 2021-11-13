@@ -21,8 +21,6 @@ and variables :
 ```hcl
 project = "foo-prod"
 
-region = "europe-west1"
-
 ##############################################################################
 # Cert-Manager
 

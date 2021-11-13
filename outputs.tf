@@ -14,5 +14,5 @@
 
 output "service_account" {
   description = "Service Account for Cert Manager"
-  value       = google_service_account.cert_manager.email
+  value       = module.service_account.email
 }

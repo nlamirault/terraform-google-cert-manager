@@ -12,20 +12,36 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-resource "google_service_account" "cert_manager" {
-  account_id   = local.service_name
-  display_name = "Cert Manager"
-  description  = "Created by Terraform"
+module "service_account" {
+  source  = "terraform-google-modules/service-accounts/google"
+  version = "4.0.3"
+
+  project_id = var.project
+
+  names = [
+    local.service
+  ]
+
+  project_roles = [
+    format("%s=>roles/dns.admin", var.project)
+  ]
 }
 
-resource "google_project_iam_member" "cert_manager" {
+module "iam" {
+  source  = "terraform-google-modules/iam/google//modules/service_accounts_iam"
+  version = "7.3.0"
+
   project = var.project
-  role    = "roles/dns.admin"
-  member  = format("serviceAccount:%s", google_service_account.cert_manager.email)
-}
 
-resource "google_service_account_iam_member" "cert_manager" {
-  role               = "roles/iam.workloadIdentityUser"
-  service_account_id = google_service_account.cert_manager.name
-  member             = format("serviceAccount:%s.svc.id.goog[%s/%s]", var.project, var.namespace, var.service_account)
+  service_accounts = [
+    module.service_account.email
+  ]
+  mode = "authoritative"
+
+  bindings = {
+    "roles/iam.workloadIdentityUser" = [
+      format("serviceAccount:%s.svc.id.goog[%s/%s]", var.project, var.namespace, var.service_account)
+    ]
+  }
+
 }
